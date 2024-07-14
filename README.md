@@ -94,7 +94,15 @@ This guide covers the configuration of a V-Server, including the installation of
 
 ## Setup SSH and Remove Password Authentication
 
-1. **Generate an SSH key pair on your local machine (if you don’t have one):**
+1. **Generate an SSH key pair on your local machine:**
+
+    For stronger security and better performance, use ED25519:
+
+    ```sh
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+    ```
+
+    If you need compatibility with older systems, use RSA with a 4096-bit key:
 
     ```sh
     ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
@@ -104,7 +112,7 @@ This guide covers the configuration of a V-Server, including the installation of
 
     ```sh
     eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_rsa
+    ssh-add ~/.ssh/id_ed25519  # or ~/.ssh/id_rsa if using RSA
     ```
 
 3. **Copy your public key to the V-Server:**
